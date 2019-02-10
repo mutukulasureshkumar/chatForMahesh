@@ -112,9 +112,9 @@ function onMessageReceived(payload) {
 		for (var i = 0; i < message.keywords.length; i++) {
 			var button = document.createElement("button");
 	    	button.innerHTML = message.keywords[i];
-	    	if(message.endCoversation == true || message.endCoversation == 'true'){
+	    	if((message.endCoversation == true || message.endCoversation == 'true') && "ADD NEW" !=message.keywords[i]){
 	    		button.setAttribute('class','button disabled') ;
-	    		EOM=true0;
+	    		EOM=true;
 	    	}else{
 	    		EOM=false;
 	    		button.setAttribute('class','button button2') ;

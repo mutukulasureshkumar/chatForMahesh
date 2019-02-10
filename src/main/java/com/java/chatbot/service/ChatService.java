@@ -127,7 +127,7 @@ public class ChatService {
                 newRelations.setParentNodeId(relations.getParentNodeId());
                 newRelations.setChildNodeId(nodetoInsert.getId());
                 newRelations.setVocabularyId(relations.getVocabularyId());
-                newRelations.setHadNextRelations(newRelations.getHadNextRelations());
+                newRelations.setHadNextRelations(relations.getHadNextRelations());
                 relationsRepossitory.save(newRelations);
             }
 
@@ -140,7 +140,7 @@ public class ChatService {
                     newRelations.setParentNodeId(nodetoInsert.getId());
                     newRelations.setChildNodeId(relations.getChildNodeId());
                     newRelations.setVocabularyId(relations.getVocabularyId());
-                    newRelations.setHadNextRelations(newRelations.getHadNextRelations());
+                    newRelations.setHadNextRelations(relations.getHadNextRelations());
                     relationsRepossitory.save(newRelations);
                 }
             }
@@ -181,8 +181,11 @@ public class ChatService {
 		    String nodeName = nodesRepossitory.findById(relations.getChildNodeId()).getNode();
 			nodesNames += nodeName  + ",";
 			keywords.add(nodeName);
-			if (relations.getHadNextRelations() > 0)
+			if (relations.getHadNextRelations() > 0) {
+				chat.setEndCoversation(true);
+			}else{
 				chat.setEndCoversation(false);
+			}
 		}
 		if(allowCustoms == 1){
 			//chat.setAllowCustom(1);
