@@ -15,7 +15,7 @@ var EOM=false;
 var NEW=false;
 var AllowCustom=0;
 var prevContent = null;
-
+var endChat = false;
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
     '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
@@ -46,6 +46,7 @@ function onConnected() {
     };
     //xhttp.open("GET", "https://elibot.cfapps.io/getChatId", true);
     xhttp.open("GET", "http://localhost:9090/getChatId", true);
+    //xhttp.open("GET", "http://10.178.143.170:9090/getChatId", true);
     xhttp.send();
 }
 
@@ -65,7 +66,8 @@ function sendMessage(event) {
             chatId: chatId,
             endCoversation: EOM,
             allowCustom: AllowCustom,
-            prevContent: prevContent
+            prevContent: prevContent,
+            endChat:endChat
         };
         NEW = false;
         EOM=false;
@@ -113,13 +115,23 @@ function onMessageReceived(payload) {
 			var button = document.createElement("button");
 	    	button.innerHTML = message.keywords[i];
 	    	if((message.endCoversation == true || message.endCoversation == 'true') && "ADD NEW" !=message.keywords[i]){
-	    		button.setAttribute('class','button disabled') ;
 	    		EOM=true;
 	    	}else{
 	    		EOM=false;
-	    		button.setAttribute('class','button button2') ;
 	    	}
-	    	button.setAttribute('onclick','press(this.innerHTML)') ;
+	    	
+	    	if(message.disableButton == true || message.disableButton == 'true'){
+	    		button.setAttribute('class','button disabled') ;
+	    	}else{
+	    		button.setAttribute('class','buttonn button3') ;
+		    	button.setAttribute('onclick','press(this.innerHTML)') ;
+	    	}
+	    	
+	    	if(message.endChat == true || message.endChat == 'true'){
+	    		endChat = true
+	    	}else{
+	    		endChat = false
+	    	}
 	    	buttonElement.appendChild(button);
 	    	messageElement.appendChild(buttonElement);
 		}

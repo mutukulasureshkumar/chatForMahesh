@@ -30,9 +30,14 @@ public class ChatController {
     }
     @CrossOrigin
     @MessageMapping("/chat.join")
-    public void joinUser(@Payload Chat chat) {
+    public void joinUser(@Payload Chat chat)  {
     	template.convertAndSend("/topic/private/"+chat.getChatId(), chat);
-    	chatService.joinUser(chat);
+    	try {
+			chatService.joinUser(chat);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     @CrossOrigin
     @RequestMapping(value = "/getChatId", method = RequestMethod.GET)

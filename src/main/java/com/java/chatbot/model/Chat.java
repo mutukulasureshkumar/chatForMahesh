@@ -1,6 +1,7 @@
 package com.java.chatbot.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,6 +22,9 @@ public class Chat {
     private transient List<Conversation> conversation;
     private boolean EndCoversation;
     private int allowCustom;
+    private boolean disableButton;
+    private boolean EndChat;
+    private HashMap<String, String> map = new HashMap<>();
 
 	public int getAllowCustom() {
 		return allowCustom;
@@ -106,5 +110,29 @@ public class Chat {
 
 	public void setKeywords(ArrayList<String> keywords) {
 		this.keywords = keywords;
+	}
+
+	public boolean isDisableButton() {
+		return disableButton;
+	}
+
+	public void setDisableButton(boolean disableButton) {
+		this.disableButton = disableButton;
+	}
+
+	public boolean isEndChat() {
+		return EndChat;
+	}
+
+	public void setEndChat(boolean endChat) {
+		EndChat = endChat;
+	}
+
+	public HashMap<String, String> getMap() {
+		return map;
+	}
+
+	public void setMap(HashMap<String, String> map) {
+		this.map = map;
 	}
 }
